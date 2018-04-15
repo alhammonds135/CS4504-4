@@ -38,7 +38,7 @@ public class HelloServer {
             Registry registry = LocateRegistry.getRegistry(rmiPortNum);
             registry.list(); // Will throw an exception if registry does not already exist
         } catch (RemoteException e) {
-            System.out.println("RMI registry created at port " + rmiPortNum);
+            System.out.println("RMI registry cannot be located at port " + rmiPortNum);
             Registry registry = LocateRegistry.createRegistry(rmiPortNum);
             System.out.println("RMI registry created at port " + rmiPortNum);
         }

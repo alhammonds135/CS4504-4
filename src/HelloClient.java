@@ -20,13 +20,13 @@ public class HelloClient {
             System.out.println("Enter the RMIRegistry port number: ");
             String portNum = br.readLine();
             RMIPort = Integer.parseInt(portNum);
-            String registryURL = "rmi://" + hostName + ":" + portNum + "/hello";
+            String registryURL = "rmi://" + hostName + ":" + RMIPort + "/hello";
             HelloInterface h = (HelloInterface)Naming.lookup(registryURL);
             System.out.println("Lookup completed ");
             String message = h.sayHello("Donald Duck");
             System.out.println("HelloClient: " + message);
         } catch (IOException | NotBoundException e) {
-            System.out.println("Execption in HelloClient: " + e);
+            System.out.println("Exception in HelloClient: " + e);
             e.printStackTrace();
         }
     }
