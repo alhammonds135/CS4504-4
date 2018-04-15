@@ -5,7 +5,7 @@ import java.rmi.*;
         @author M. L. Liu
      */
 
-public interface HelloInterface {
+public interface HelloInterface extends java.rmi.Remote{
     String sayHello(String name) throws RemoteException;
 
 }
