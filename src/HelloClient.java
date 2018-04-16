@@ -37,7 +37,7 @@ public class HelloClient implements MyRunnable{
     public void run(int counter) {
         try {
             String message = new NumPairFormatter(counter).toString();
-            System.out.println(message+ " ->" + myHello.serverAdd(message));
+            System.out.println("\t"+message+ " ->" + myHello.serverAdd(message));
         } catch (RemoteException e) {
             e.printStackTrace();
         }

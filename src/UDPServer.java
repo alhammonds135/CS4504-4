@@ -41,7 +41,7 @@ public class UDPServer {
                 String newMessage = processNum + "." + Integer.toString(num1 + num2);
 
                 // Sends new uppercase message
-                socket.sendMessage(clientHost, clientPort, newMessage);
+                socket.sendMessage(newMessage);
 
                 // Closes socket
                 socket.close();

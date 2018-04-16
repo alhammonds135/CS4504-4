@@ -25,8 +25,8 @@ public class TimerTester {
     }
 
     public static void main(String[] args) {
-        HelloClient helloClient = new HelloClient();
-        TimerTester timerTester = new TimerTester(helloClient);
+        MyRunnable client = new TCPClient();
+        TimerTester timerTester = new TimerTester(client);
         Duration[] durations = timerTester.testRun();
         for (Duration duration: durations) {
             System.out.format("%d.%09d%n",duration.getSeconds(),duration.getNano());

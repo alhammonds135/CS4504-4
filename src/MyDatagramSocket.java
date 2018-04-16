@@ -11,18 +11,27 @@ import java.net.SocketException;
 
 public class MyDatagramSocket extends DatagramSocket {
     static final int MAX_LEN = 10;
+    private InetAddress host;
+    private int hostPort;
     MyDatagramSocket(int portNo) throws SocketException {
         super(portNo);
     }
 
-    public void sendMessage (InetAddress receiverHost, int receiverPort, String message) {
+    public void sendMessage (String message) {
         byte[] sendBuffer = message.getBytes();
-        DatagramPacket datagram = new DatagramPacket(sendBuffer, sendBuffer.length, receiverHost, receiverPort);
+        DatagramPacket datagram = new DatagramPacket(sendBuffer, sendBuffer.length, host, hostPort);
         try {
             this.send(datagram);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void connect(InetAddress address, int port) {
+        super.connect(address, port);
+        host = address;
+        hostPort = port;
     }
 
     public String receiveMessage() throws IOException {

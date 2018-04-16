@@ -28,7 +28,7 @@ public class UDPClient implements MyRunnable {
 
             // Tries to send the packet ten times
 
-            socket.sendMessage(serverHost, serverPort, message);
+            socket.sendMessage(message);
 
 
             String msg = null;
