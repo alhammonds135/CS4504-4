@@ -25,8 +25,8 @@ public class TimerTester {
     }
 
     public static void main(String[] args) {
-        MyRunnable client = new TCPClient();
-        TimerTester timerTester = new TimerTester(client);
+        MyRunnable udpClient = new UDPClient();
+        TimerTester timerTester = new TimerTester(udpClient);
         Duration[] durations = timerTester.testRun();
         for (Duration duration: durations) {
             System.out.format("%d.%09d%n",duration.getSeconds(),duration.getNano());

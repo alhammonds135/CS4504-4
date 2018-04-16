@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.net.*;
 import java.util.Scanner;
 
@@ -18,33 +19,45 @@ public class UDPServer {
             System.out.println("This program requires three command line arguments. Try again.");
         } else {
             try {
-                InetAddress clientHost = InetAddress.getByName(args[1]); //Host to send to
-                int serverPort = Integer.parseInt(args[2]); // Port to send to
-                int clientPort = Integer.parseInt(args[3]); // Current port
+                InetAddress clientHost = InetAddress.getByName(args[0]); //Host to send to
+                int serverPort = Integer.parseInt(args[1]); // Port to send to
+                int clientPort = Integer.parseInt(args[2]); // Current port
 
                 // Creates socket to receive message from and send message back
-                MyDatagramSocket socket = new MyDatagramSocket(serverPort);
+                DatagramSocket socket = new DatagramSocket(serverPort);
 
                 String message;
 
-                // Receives message from client and prints to command line
-                message = socket.receiveMessage();
+                while(true) {
+                    // Receives message from client and prints to command line
+                    byte[] buff = new byte[20];
+                    DatagramPacket packet = new DatagramPacket(buff, 20);
 
-                String [] splitStr = message.split(".");
-                int processNum = Integer.parseInt(splitStr[0]);
-                String [] splitAgain = splitStr[1].split(",");
+                    socket.receive(packet);
 
-                int num1 = Integer.parseInt(splitAgain[0]);
-                int num2 = Integer.parseInt(splitAgain[1]);
+                    message = new String(buff);
 
-                // Converts message to uppercase
-                String newMessage = processNum + "." + Integer.toString(num1 + num2);
+                    String[] splitStr = message.split("\\.");
+                    int processNum = Integer.parseInt(splitStr[0]);
+                    String[] splitAgain = splitStr[1].split(",");
 
-                // Sends new uppercase message
-                socket.sendMessage(newMessage);
+                    int num1 = Integer.parseInt(splitAgain[0]);
 
-                // Closes socket
-                socket.close();
+                    int num2;
+
+                    try {
+                        num2 = Integer.parseInt(splitAgain[1].substring(0, 2));
+                    } catch (NumberFormatException f) {
+                        num2 = Integer.parseInt(splitAgain[1].substring(0, 1));
+                    }
+
+                    String newMessage = processNum + "." + Integer.toString(num1 + num2);
+
+                    byte[] b = newMessage.getBytes();
+
+                    DatagramPacket packet1 = new DatagramPacket(b, b.length, clientHost, clientPort);
+                    socket.send(packet1);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
