@@ -13,7 +13,7 @@ public class HelloImpl extends UnicastRemoteObject implements HelloInterface{
     }
 
     public String serverAdd(String message) throws RemoteException {
-        String [] splitStr = message.split(".");
+        String [] splitStr = message.split("\\.");
         int processNum = Integer.parseInt(splitStr[0]);
         String [] splitAgain = splitStr[1].split(",");
 
