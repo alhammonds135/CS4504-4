@@ -6,6 +6,6 @@ import java.rmi.*;
      */
 
 public interface HelloInterface extends java.rmi.Remote{
-    String sayHello(String name) throws RemoteException;
+    String serverAdd(String name) throws RemoteException;
 
 }
