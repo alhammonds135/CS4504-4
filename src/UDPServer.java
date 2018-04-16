@@ -1,14 +1,6 @@
-import javax.xml.crypto.Data;
 import java.net.*;
-import java.util.Scanner;
 
-// Assignment 1
 // Author: Alaina Hammonds
-// File Name: UDPServer.java
-// Purpose: Receives and converts information, then sends it back using UDP protocol
-// Programming Lanuage: Java
-// Execution: Compile from command line on server computer using a JDK package, run with four arguments, as seen below
-//  *THIS PROGRAM MUST BE STARTED BEFORE THE CLIENT PROGRAM*
 
 public class UDPServer {
     public static void main(String[] args) {

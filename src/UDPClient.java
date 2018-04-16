@@ -1,22 +1,15 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.*;
 import java.util.Scanner;
 
-// Assignment 1
 // Author: Alaina Hammonds
-// File Name: UDPClient.java
-// Purpose: Sends information and receives back converted information using UDP protocol
-// Programming Lanuage: Java
-// Execution: Compile from command line on client computer using a JDK package, run with four arguments, as seen below
-// *THE SERVER PROGRAM MUST BE STARTED BEFORE THIS PROGRAM*
+
 
 public class UDPClient implements MyRunnable {
     private DatagramSocket socket;
-    int serverPort;
-    int clientPort;
-    InetAddress serverHost;
+    private int serverPort;
+    private int clientPort;
+    private InetAddress serverHost;
 
     public UDPClient() {
         try {

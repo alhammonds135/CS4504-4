@@ -3,9 +3,11 @@ import java.time.LocalTime;
 
 import static java.time.LocalTime.now;
 
+//Author: Eshin Griffith
+
 public class TimerTester {
     private final int MINPOWER = 2;
-    private final int MAXPOWER = 6;
+    private final int MAXPOWER = 8;
     private MyRunnable client;
     public  TimerTester(MyRunnable runnable) {
         this.client = runnable;
@@ -25,8 +27,10 @@ public class TimerTester {
     }
 
     public static void main(String[] args) {
-        MyRunnable udpClient = new UDPClient();
-        TimerTester timerTester = new TimerTester(udpClient);
+        MyRunnable client = new HelloClient(); // Uncomment which one you want to test
+        // MyRunnable client = new UDPClient();
+        // MyRunnable client = new TCPClient();
+        TimerTester timerTester = new TimerTester(client);
         Duration[] durations = timerTester.testRun();
         for (Duration duration: durations) {
             System.out.format("%d.%09d%n",duration.getSeconds(),duration.getNano());

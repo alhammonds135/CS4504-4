@@ -1,3 +1,5 @@
+// Author: Eshin Griffith
+
 public class NumPairFormatter {
     private int num1;
     private int num2;

@@ -1,10 +1,4 @@
-// Assignment 1
-// Author: Alaina Hammonds
-// File Name: TCPServer.java
-// Purpose: Receives and converts information, then sends it back using TCP protocol
-// Programming Lanuage: Java
-// Execution: Compile from command line on sever computer using a JDK package, run with four arguments, as seen below.
-//  *THIS PROGRAM MUST BE STARTED BEFORE THE CLIENT PROGRAM*
+// Author: Eshin Griffith
 
 import java.io.BufferedReader;
 import java.io.IOException;

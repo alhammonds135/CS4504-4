@@ -1,12 +1,7 @@
 import java.io.*;
 import java.rmi.*;
 
-/*
-    This class represents the object client for a distributed
-    object of class Hello, which implements the remote interface
-    HelloInterface.
-    @author M. L. Liu
- */
+// Author: Alaina Hammonds
 
 public class HelloClient implements MyRunnable{
     private HelloInterface myHello;

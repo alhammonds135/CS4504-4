@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.net.*;
 import java.util.Scanner;
 
+// Author: Eshin Griffith
+
 public class TCPClient implements MyRunnable{
     private Socket socket;
     private PrintWriter out;
