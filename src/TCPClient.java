@@ -49,39 +49,4 @@ public class TCPClient implements MyRunnable{
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the host: ");
-            InetAddress serverHost = InetAddress.getByName(scanner.nextLine()); //Host to send to
-
-            System.out.print("Enter the server port");
-            int serverPort = Integer.parseInt(scanner.nextLine()); // Port to send to
-            System.out.println("Enter the client port: ");
-            int clientPort = Integer.parseInt(scanner.nextLine()); // Current port
-
-            System.out.println("Enter [ProcessNumber].[Num1][Num2]");
-            String message = scanner.nextLine(); // Message to send
-
-            // Creates socket
-            MyDatagramSocket socket = new MyDatagramSocket(clientPort);
-
-            // Connect to server
-            socket.connect(serverHost, serverPort);
-
-            // Send message
-            socket.sendMessage(message);
-
-            // Receives message and prints out
-            System.out.println(socket.receiveMessage());
-
-            // Disconnects and closes socket
-            socket.disconnect();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
