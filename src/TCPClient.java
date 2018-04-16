@@ -7,23 +7,13 @@
 // *THE SERVER PROGRAM MUST BE STARTED BEFORE THIS PROGRAM*
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Scanner;
-
-public class TCPClient {
+public class TCPClient implements MyRunnable {
     public static void main(String[] args) {
-
         try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the host: ");
-            InetAddress serverHost = InetAddress.getByName(scanner.nextLine()); //Host to send to
-
-            System.out.print("Enter the server port");
-            int serverPort = Integer.parseInt(scanner.nextLine()); // Port to send to
-            System.out.println("Enter the client port: ");
-            int clientPort = Integer.parseInt(scanner.nextLine()); // Current port
-
-            System.out.println("Enter [ProcessNumber].[Num1][Num2]");
-            String message = scanner.nextLine(); // Message to send
+            InetAddress serverHost = InetAddress.getByName(args[1]); //Host to send to
+            int serverPort = Integer.parseInt(args[2]); // Port to send to
+            int clientPort = Integer.parseInt(args[3]); // Current port
+            String message = args[3]; // Message to send
 
             // Creates socket
             MyDatagramSocket socket = new MyDatagramSocket(clientPort);
@@ -43,5 +33,10 @@ public class TCPClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void run(int counter) {
+
     }
 }

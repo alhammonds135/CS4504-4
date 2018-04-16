@@ -13,16 +13,9 @@ import java.util.Scanner;
 public class TCPServer {
     public static void main(String[] args) {
         try {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("Enter the host:");
-            InetAddress clientHost = InetAddress.getByName(scanner.nextLine()); // Host to send back to
-
-            System.out.print("Enter the client port: ");
-            int clientPort = Integer.parseInt(scanner.nextLine()); // Port to send back to
-
-            System.out.print("Enter the server port: ");
-            int serverPort = Integer.parseInt(scanner.nextLine()); // Current port
+            InetAddress clientHost = InetAddress.getByName(args[1]); //Host to send to
+            int serverPort = Integer.parseInt(args[2]); // Port to send to
+            int clientPort = Integer.parseInt(args[3]); // Current port
 
             // Creates new socket
             MyDatagramSocket socket = new MyDatagramSocket(serverPort);
@@ -30,7 +23,7 @@ public class TCPServer {
             // Connects to client
             socket.connect(clientHost, clientPort);
 
-            String message = null;
+            String message;
 
             message = socket.receiveMessage();
 

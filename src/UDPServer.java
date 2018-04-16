@@ -18,16 +18,9 @@ public class UDPServer {
             System.out.println("This program requires three command line arguments. Try again.");
         } else {
             try {
-                Scanner scanner = new Scanner(System.in);
-
-                System.out.print("Enter the host: ");
-                InetAddress clientHost = InetAddress.getByName(scanner.nextLine()); // Host to send back to
-
-                System.out.print("Enter the client port: ");
-                int clientPort = Integer.parseInt(scanner.nextLine()); // Port to send back to
-
-                System.out.print("Enter the server port: ");
-                int serverPort = Integer.parseInt(scanner.nextLine()); // Current port
+                InetAddress clientHost = InetAddress.getByName(args[1]); //Host to send to
+                int serverPort = Integer.parseInt(args[2]); // Port to send to
+                int clientPort = Integer.parseInt(args[3]); // Current port
 
                 // Creates socket to receive message from and send message back
                 MyDatagramSocket socket = new MyDatagramSocket(serverPort);
