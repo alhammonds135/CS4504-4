@@ -6,52 +6,40 @@
 // Execution: Compile from command line on sever computer using a JDK package, run with four arguments, as seen below.
 //  *THIS PROGRAM MUST BE STARTED BEFORE THE CLIENT PROGRAM*
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Scanner;
 
 public class TCPServer {
     public static void main(String[] args) {
-        try {
-            Scanner scanner = new Scanner(System.in);
+        if (args.length != 3) {
+            System.out.println("This program requires three command line arguments. Try again.");
+        } else {
+            try {
+                InetAddress clientHost = InetAddress.getByName(args[0]); // Host to send back to
+                int clientPort = Integer.parseInt(args[1]); // Port to send back to
+                int serverPort = Integer.parseInt(args[2]); // Current port
 
-            System.out.print("Enter the host:");
-            InetAddress clientHost = InetAddress.getByName(scanner.nextLine()); // Host to send back to
+                // Creats new socket
+                MyDatagramSocket socket = new MyDatagramSocket(serverPort);
 
-            System.out.print("Enter the client port: ");
-            int clientPort = Integer.parseInt(scanner.nextLine()); // Port to send back to
+                // Connects to client
+                socket.connect(clientHost, clientPort);
 
-            System.out.print("Enter the server port: ");
-            int serverPort = Integer.parseInt(scanner.nextLine()); // Current port
+                // Receives message from client and prints out
+                String message = socket.receiveMessage();
+                System.out.println(message);
 
-            // Creates new socket
-            MyDatagramSocket socket = new MyDatagramSocket(serverPort);
+                // Converts message to uppercase
+                String newMessage = message.toUpperCase();
 
-            // Connects to client
-            socket.connect(clientHost, clientPort);
+                // Sends back converted message;
+                socket.sendMessage(clientHost, clientPort, newMessage);
 
-            String message = null;
-
-            message = socket.receiveMessage();
-
-            String [] splitStr = message.split(".");
-            int processNum = Integer.parseInt(splitStr[0]);
-            String [] splitAgain = splitStr[1].split(",");
-
-            int num1 = Integer.parseInt(splitAgain[0]);
-            int num2 = Integer.parseInt(splitAgain[1]);
-
-            // Converts message to uppercase
-            String newMessage = processNum + "." + Integer.toString(num1 + num2);
-
-            // Sends back converted message;
-            socket.sendMessage(clientHost, clientPort, newMessage);
-
-            //Disconnects and closes socket
-            socket.disconnect();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+                //Disconnects and closes socket
+                socket.disconnect();
+                socket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

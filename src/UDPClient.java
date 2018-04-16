@@ -1,5 +1,4 @@
 import java.net.*;
-import java.util.Scanner;
 
 // Assignment 1
 // Author: Alaina Hammonds
@@ -19,17 +18,10 @@ public class UDPClient {
             System.out.println("This program requires four command line arguments. Try again.");
         } else {
             try {
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter the host: ");
-                InetAddress serverHost = InetAddress.getByName(scanner.nextLine()); //Host to send to
-
-                System.out.print("Enter the port number to send to: ");
-                int serverPort = Integer.parseInt(scanner.nextLine()); // Port to send to
-                System.out.println("Enter your current port: ");
-                int clientPort = Integer.parseInt(scanner.nextLine()); // Current port
-
-                System.out.println("Enter [ProcessNumber].[Num1][Num2]");
-                String message = scanner.nextLine(); // Message to send
+                InetAddress serverHost = InetAddress.getByName(args [0]);
+                int serverPort = Integer.parseInt(args[1]);
+                int clientPort = Integer.parseInt(args[2]);
+                String message = args[3];
 
                 //Creates sending and receiving socket
                 MyDatagramSocket socket = new MyDatagramSocket(clientPort);

@@ -1,5 +1,4 @@
 import java.net.*;
-import java.util.Scanner;
 
 // Assignment 1
 // Author: Alaina Hammonds
@@ -18,16 +17,9 @@ public class UDPServer {
             System.out.println("This program requires three command line arguments. Try again.");
         } else {
             try {
-                Scanner scanner = new Scanner(System.in);
-
-                System.out.print("Enter the host: ");
-                InetAddress clientHost = InetAddress.getByName(scanner.nextLine()); // Host to send back to
-
-                System.out.print("Enter the client port: ");
-                int clientPort = Integer.parseInt(scanner.nextLine()); // Port to send back to
-
-                System.out.print("Enter the server port: ");
-                int serverPort = Integer.parseInt(scanner.nextLine()); // Current port
+                InetAddress clientHost = InetAddress.getByName(args[0]); // Host to send back to
+                int clientPort = Integer.parseInt(args[1]); // Port to send back to
+                int serverPort = Integer.parseInt(args[2]); // Current port
 
                 // Creates socket to receive message from and send message back
                 MyDatagramSocket socket = new MyDatagramSocket(serverPort);
@@ -36,16 +28,10 @@ public class UDPServer {
 
                 // Receives message from client and prints to command line
                 message = socket.receiveMessage();
-
-                String [] splitStr = message.split(".");
-                int processNum = Integer.parseInt(splitStr[0]);
-                String [] splitAgain = splitStr[1].split(",");
-
-                int num1 = Integer.parseInt(splitAgain[0]);
-                int num2 = Integer.parseInt(splitAgain[1]);
+                System.out.println("Message received: " + message);
 
                 // Converts message to uppercase
-                String newMessage = processNum + "." + Integer.toString(num1 + num2);
+                String newMessage = message.toUpperCase();
 
                 // Sends new uppercase message
                 socket.sendMessage(clientHost, clientPort, newMessage);

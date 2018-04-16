@@ -5,43 +5,40 @@
 // Programming Lanuage: Java
 // Execution: Compile from command line on client computer using a JDK package, run with four arguments, as seen below
 // *THE SERVER PROGRAM MUST BE STARTED BEFORE THIS PROGRAM*
-import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Scanner;
 
 public class TCPClient {
     public static void main(String[] args) {
+        // Four command line arguments are expected when running:
+        // IP Address, Server Port Number, Client's Port number, and the message to be converted, in that order
+        // Error checking for correct number of arguments
+        if (args.length != 4) {
+            System.out.println("This program requires four command line arguments. Try again.");
+        } else {
+            try {
+                InetAddress serverHost = InetAddress.getByName(args [0]); //Host to send to
+                int serverPort = Integer.parseInt(args[1]); // Port to send to
+                int clientPort = Integer.parseInt(args[2]); // Current port
+                String message = args[3]; // Message to send
 
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the host: ");
-            InetAddress serverHost = InetAddress.getByName(scanner.nextLine()); //Host to send to
+                // Creates socket
+                MyDatagramSocket socket = new MyDatagramSocket(clientPort);
 
-            System.out.print("Enter the server port");
-            int serverPort = Integer.parseInt(scanner.nextLine()); // Port to send to
-            System.out.println("Enter the client port: ");
-            int clientPort = Integer.parseInt(scanner.nextLine()); // Current port
+                // Connect to server
+                socket.connect(serverHost, serverPort);
 
-            System.out.println("Enter [ProcessNumber].[Num1][Num2]");
-            String message = scanner.nextLine(); // Message to send
+                // Send message
+                socket.sendMessage(serverHost, serverPort, message);
 
-            // Creates socket
-            MyDatagramSocket socket = new MyDatagramSocket(clientPort);
+                // Receives message and prints out
+                System.out.println(socket.receiveMessage());
 
-            // Connect to server
-            socket.connect(serverHost, serverPort);
-
-            // Send message
-            socket.sendMessage(serverHost, serverPort, message);
-
-            // Receives message and prints out
-            System.out.println(socket.receiveMessage());
-
-            // Disconnects and closes socket
-            socket.disconnect();
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Disconnects and closes socket
+                socket.disconnect();
+                socket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
